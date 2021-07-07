@@ -1,4 +1,6 @@
 import boto3
+import json
+from boto3.dynamodb.conditions import Key, Attr
 
 class Database():
     
@@ -23,4 +25,11 @@ class Database():
         )
         return db_response['Item']['content']
 
-        
+    def getfilenames(self, uid: int):
+        query_res = Database.table.query(
+            KeyConditionExpression = Key('uid').eq(uid)
+        )
+        db_response = []
+        for item in query_res['Items']:
+            db_response.append(item['filename'])
+        return json.dumps(db_response)

@@ -1,19 +1,24 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Copy anything, paste anywhere! Your cloud clipboard.">
+    <meta name="author" content="Yonghuan Hu">
 	<link rel="stylesheet" href="css/index.css">
+	<title>Anything Anywhere</title>
+	<script src="js/common.js"></script>
+	<script src="js/transfer.js"></script>
+	<script src="js/dragdrop.js"></script>
 </head>
 
 <body>
 	<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-		<p id="drop_prompt" style="visibility: hidden;">Drop file</p>
+		<p id="drop_prompt" style="visibility: hidden;">Drop text, image, or anything you like.</p>
 	</div>
-	<button onclick="submit(666, 'name.txt', 'icu')">Submit</button>
-	<button onclick="get(666, 'name.txt')">Get</button>
+	<button onclick="uploadFile(uid, 'name.txt', 'icu')">Submit</button>
+	<button onclick="getFileContent(uid, 'name.txt')">Get</button>
 </body>
 
-<script src="js/dragdrop.js"></script>
-
-</body>
 </html>
