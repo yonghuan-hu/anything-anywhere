@@ -6,19 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Copy anything, paste anywhere! Your cloud clipboard.">
     <meta name="author" content="Yonghuan Hu">
-	<link rel="stylesheet" href="css/index.css">
+	
+	<link rel="icon" href="img/icon.png">
 	<title>Anything Anywhere</title>
+	<!-- Bootstrap CSS and JSON -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<!-- My CSS and JSON -->
+	<link rel="stylesheet" href="css/index.css">
 	<script src="js/common.js"></script>
 	<script src="js/transfer.js"></script>
 	<script src="js/dragdrop.js"></script>
 </head>
 
-<body>
-	<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-		<p id="drop_prompt" style="visibility: hidden;">Drop text, image, or anything you like.</p>
-	</div>
-	<button onclick="uploadFile(uid, 'name.txt', 'icu')">Submit</button>
-	<button onclick="getFileContent(uid, 'name.txt')">Get</button>
+
+
+<body id="body">
+
+	<header>
+		<nav class="navbar navbar-dark">
+			<div class="container-fluid" >
+				<a class="navbar-brand" href="#">
+					<img src="img/icon.png" class="mx-2" alt="" width="40" height="40">
+					<span>Anything Anywhere</span>
+				</a>
+				<form class="d-flex">
+					<input class="form-control me-2" type="search" placeholder="Your UID" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Random&nbspUID</button>
+				</form>
+			</div>
+		</nav>		  
+	</header>
+
+	<main class="mh-75 container-fluid p-3">
+		<div class="row h-100">
+			<div class="col-3 h-100">
+				<div class="card m-1">
+					<div class="overlay center">
+						<button class="btn btn-primary btn-sm">💾 Save</button>
+						<button class="btn btn-danger btn-sm">❌ Delete</button>
+					</div>
+					<img class="card-img-top" src="img/file.svg">
+					<div class="card-footer bg-light">1625639938780					</div>
+				</div>
+			</div>
+			<div class="col me-3 h-100" id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+				<div class="row" id="cards">
+
+				</div>
+				<!-- <p id="drop_prompt" style="visibility: hidden;">Drop text, image, or anything you like.</p>
+				<button onclick="uploadFile(uid, 'name.txt', 'icu')">Submit</button>
+				<button onclick="getFileContent(uid, 'name.txt')">Get</button> -->
+			</div>
+			
+		</div>
+	</main>
+
 </body>
 
 </html>
