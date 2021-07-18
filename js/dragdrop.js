@@ -14,17 +14,21 @@ function dropHandler(ev) {
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					var fileContent = e.target.result; // binary data
+					var filename = String(file.name).replace(' ', '-');
 					uploadFile(uid, file.name, fileContent);
 				};
 				reader.onerror = function(e) {
 					// error occurred
-					console.log('Error : ' + e.type);
+					console.log('Error: ' + e.type);
 				};
 				reader.readAsBinaryString(file);
 			}
 			else if (datatype === 'string') {
-				var str = ev.dataTransfer.getData("text");
-				uploadFile(uid, String(Date.now()), str);
+				var strContent = ev.dataTransfer.getData("text");
+				var d = new Date(Date.now());
+				let f = function(t){return (t <= 9) ? ('0' + t) : String(t);}
+				var filename = "Text-copied-" + [f(d.getHours()), f(d.getMinutes()), f(d.getSeconds())].join(':');
+				uploadFile(uid, filename, strContent);
 			}
 			else {
 

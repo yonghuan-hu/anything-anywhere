@@ -3,7 +3,7 @@ function uploadFile(uid, filename, content) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
-             alert(this.responseText);
+             alert("Success");
          }
     };
     request.open("POST", "https://nuept8nnrj.execute-api.us-west-2.amazonaws.com/default/anything-anywhere", true);
@@ -12,12 +12,14 @@ function uploadFile(uid, filename, content) {
 	request.send(body);
 }
 
-function getFileContent(uid, filename) {
+function getFileContent(uid, filename, callback) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
 			console.log(this.responseText);
 			var content = this.responseText;
+            callback(content);
+            // console.log("content of " + filename + " :" + content);
 			var blob = new Blob([content], { type: 'text/plain' });
             var file = new File([blob], filename, { type: 'text/plain' });
 			// file

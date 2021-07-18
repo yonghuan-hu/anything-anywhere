@@ -10,8 +10,6 @@ window.onload = function() {
 		});
 		drawFiles();
 	});
-	
-
 	// window.setInterval(function(){
 	// 	bgAngle = (bgAngle + 10) % 360;
 	// 	var body = document.getElementsByTagName("body")[0];
@@ -48,7 +46,9 @@ function drawFiles() {
 		}
 		else {
 			let text = document.createElement("p");
-			text.innerHTML = getFileContent(uid, filename);
+			getFileContent(uid, filename, function(fileContent){
+				text.innerHTML = fileContent;
+			});
 			card.appendChild(text);
 		}
 
