@@ -1,35 +1,26 @@
-import boto3
 import json
-from boto3.dynamodb.conditions import Key, Attr
+import time
+import traceback
+from handler import *
 
-class Database():
+def lambda_handler(event, context):
+    response = default_response()
     
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('anything-anywhere-db')
+    try:
+        # get request method
+        method = event["httpMethod"]
+        # and react accordingly
+        if method == "POST":
+            response["body"] = handle_method_post(json.loads(event["body"]))
+        elif method == "GET":
+            response["body"] = handle_method_get(event["pathParameters"])
+        elif method == "DELETE":
+            response["body"] = handle_method_delete(event["pathParameters"])
+        else:
+            response["statusCode"] = 404
     
-    def insert(self, uid: int, filename: str, content: str):
-        Database.table.put_item(
-           Item={
-                'uid': uid,
-                'filename': filename,
-                'content': content
-            }
-        )
-        
-    def getcontent(self, uid: int, filename: str):
-        db_response = Database.table.get_item(
-            Key={
-                'uid': uid, 
-                'filename': filename
-            }
-        )
-        return db_response['Item']['content']
-
-    def getfilenames(self, uid: int):
-        query_res = Database.table.query(
-            KeyConditionExpression = Key('uid').eq(uid)
-        )
-        db_response = []
-        for item in query_res['Items']:
-            db_response.append(item['filename'])
-        return json.dumps(db_response)
+    except Exception as err:
+        response["body"] = traceback.format_exc()
+    
+    # do response
+    return response

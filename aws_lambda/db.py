@@ -15,8 +15,9 @@ class Database():
                 'content': content
             }
         )
+        return "success"
         
-    def getcontent(self, uid: int, filename: str):
+    def get_file(self, uid: int, filename: str):
         db_response = Database.table.get_item(
             Key={
                 'uid': uid, 
@@ -25,7 +26,7 @@ class Database():
         )
         return db_response['Item']['content']
 
-    def getfilenames(self, uid: int):
+    def get_user_files(self, uid: int):
         query_res = Database.table.query(
             KeyConditionExpression = Key('uid').eq(uid)
         )
@@ -33,3 +34,16 @@ class Database():
         for item in query_res['Items']:
             db_response.append(item['filename'])
         return json.dumps(db_response)
+        
+    def delete_file(self, uid: int, filename: str):
+        db_response = Database.table.delete_item(
+            Key={
+                'uid': uid,
+                'filename': filename
+            }
+        )
+        return json.dumps(db_response)
+    
+    def delete_user_files(self, uid: int):
+        pass
+        return None
