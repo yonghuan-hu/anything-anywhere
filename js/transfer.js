@@ -3,7 +3,7 @@ function uploadFile(uid, filename, content) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
-             alert("Success");
+            console.log("uploadFile response:" + this.responseText);
          }
     };
     request.open("POST", "https://nuept8nnrj.execute-api.us-west-2.amazonaws.com/default/anything-anywhere", true);
@@ -16,7 +16,7 @@ function getFileContent(uid, filename, callback) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
-			console.log(this.responseText);
+			console.log("getFileContent response:" + this.responseText);
 			var content = this.responseText;
             callback(content);
             // console.log("content of " + filename + " :" + content);

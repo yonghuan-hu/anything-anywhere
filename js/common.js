@@ -10,11 +10,6 @@ window.onload = function() {
 		});
 		drawFiles();
 	});
-	// window.setInterval(function(){
-	// 	bgAngle = (bgAngle + 10) % 360;
-	// 	var body = document.getElementsByTagName("body")[0];
-	// 	body.style.backgroundImage = "linear-gradient(" + bgAngle + "deg, rgb(74, 0, 109), rgb(0, 0, 0), rgb(60, 0, 88))";
-	// },1000);
 };
 
 function drawFiles() {
